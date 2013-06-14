@@ -759,6 +759,8 @@ ISR(usart(USART, _TX_vect))
     {
       sgc_power_state.ack = SGC_ACK;        /* set status: infinite timeout is always ACK */
 #ifdef SGC_ECMD_SEND_SUPPORT
+    if ((sgc_power_state.ist == SGC_SHUTDOWN) ||
+        (sgc_power_state.ist == SGC_POWERUP))
       ecmd_sender_send_command(&ip, PSTR("ACK\n"), NULL);
 #endif /* SGC_ECMD_SEND_SUPPORT */
     }
